@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.container {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 70vw;
+    border: 1px solid black;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    padding: 0px 40px;
+    background-color: rgba(0, 0, 255, 0.5);
+}
+
+.auto {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.auto__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30vw;
+    height: fit-content;
+    border: 2px solid blanchedalmond;
+}
+
+.auto__field {
+    width: 160px;
+}
+
+.fuel-items {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}
+
+.fuel-item {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+} 

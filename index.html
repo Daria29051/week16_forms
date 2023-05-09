@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+    <h1 class="title">Калькулятор стоимости авто</h1>
+<div class="auto">
+    <!-- Цена -->
+    <div class="auto__item">
+        <label for="price" class="auto__label" >Цена на аукционе , руб.</label>
+        <input class="auto__field" type="number" name="price" id="price"> 
+</div>
+<!-- Марка авто -->
+<div class="auto__item">
+    <label for="brand" class="auto__label"> Марка автомобиля</label>
+    <select class="auto__field" name="brand" id="brand">
+        <option value="0">Выберите марку</option>
+        <option value="1">Renault</option>
+        <option value="2">Opel</option>
+        <option value="3">Mazda</option>
+        <option value="4">Jaguar</option>
+    </select>
+</div>
+
+<!-- Модель авто -->
+<div class="auto__item">
+    <label for="model" class="auto__label"> Модель автомобиля</label>
+    <select class="auto__field" name="model" id="model" disabled>
+        <option value="0">Выберите модель</option>
+    </select>
+</div>
+
+<!-- Тип топлива -->
+<div class="auto__item">
+<label for="fuel-items"> Тип топлива</label>
+<div class="fuel-items" id="fuel-items">
+<div class="fuel-item"><input type="radio" name="fuel" value="petrol"> <p>Бензин</p></div>
+<div class="fuel-item"><input type="radio" name="fuel" value="diesel"> <p>Дизель</p></div>
+<div class="fuel-item"><input type="radio" name="fuel" value="electro"> <p>Электрический</p></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
