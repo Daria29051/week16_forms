@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
     <h1 class="title">Калькулятор стоимости авто</h1>
+    <div class="container">    
 <div class="auto">
     <!-- Цена -->
     <div class="auto__item">
@@ -39,14 +39,54 @@
 <!-- Тип топлива -->
 <div class="auto__item">
 <label for="fuel-items"> Тип топлива</label>
-<div class="fuel-items" id="fuel-items">
-<div class="fuel-item"><input type="radio" name="fuel" value="petrol"> <p>Бензин</p></div>
-<div class="fuel-item"><input type="radio" name="fuel" value="diesel"> <p>Дизель</p></div>
-<div class="fuel-item"><input type="radio" name="fuel" value="electro"> <p>Электрический</p></div>
+<div class="radio-selector" id="fuel-items">
+<div class="radio"><input type="radio" name="fuel" value="petrol"> <p>Бензин</p></div>
+<div class="radio"><input type="radio" name="fuel" value="diesel"> <p>Дизель</p></div>
+<div class="radio"><input type="radio" name="fuel" value="electro"> <p>Электрический</p></div>
 </div>
 </div>
+
+  <!-- Объем двигателя -->
+  <div class="auto__item">
+    <label for="engine" class="auto__label" >Объём двигателя, л.</label>
+    <input class="auto__field" type="number" name="engine" id="engine"> 
 </div>
+
+ <!-- Мощность -->
+ <div class="auto__item">
+    <label for="power" class="auto__label" >Мощность, л.c.</label>
+    <input class="auto__field" type="number" name="power" id="power"> 
 </div>
+
+<!-- Состояние авто -->
+<div class="auto__item">
+    <label for="condition-items"> Состояние авто</label>
+    <form class="radio-selector" id="condition-items">
+    <div class="radio"><input type="radio" name="condition" value="new"> <p>Новый</p></div>
+    <div class="radio"><input type="radio" name="condition" value="old"> <p>Подержанный</p></div>
+    </form>
+    </div>
+
+
+    <!-- Количество владельцев -->
+<div class="auto__item">
+    <label for="owners" class="auto__label"> Количество владельцев</label>
+    <select class="auto__field" name="owners" id="owners" disabled>
+        <option value="0">Выберите количество</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3 и более</option>
+    </select>
+</div>
+
+<!-- Кнопка Рассчитать -->
+<button class="button">Рассчитать</button>
+</div>
+
+
+<div class="errors"></div>
+</div>
+
 
     <script src="script.js"></script>
 </body>
