@@ -9,22 +9,19 @@
 </head>
 <body>
     <h1 class="title">Калькулятор стоимости авто</h1>
-    <div class="container">    
+    <div class="container">
+    <div class="input">    
 <div class="auto">
-    <!-- Цена -->
-    <div class="auto__item">
-        <label for="price" class="auto__label" >Цена на аукционе , руб.</label>
-        <input class="auto__field" type="number" name="price" id="price"> 
-</div>
+
 <!-- Марка авто -->
 <div class="auto__item">
     <label for="brand" class="auto__label"> Марка автомобиля</label>
     <select class="auto__field" name="brand" id="brand">
-        <option value="0">Выберите марку</option>
-        <option value="1">Renault</option>
-        <option value="2">Opel</option>
-        <option value="3">Mazda</option>
-        <option value="4">Jaguar</option>
+        <option value="Выберите марку">Выберите марку</option>
+        <option value="Renault">Renault</option>
+        <option value="Opel">Opel</option>
+        <option value="Mazda">Mazda</option>
+        <option value="Jaguar">Jaguar</option>
     </select>
 </div>
 
@@ -79,6 +76,29 @@
     </select>
 </div>
 
+    <!--Возраст авто -->
+    <div class="auto__item">
+        <label for="age" class="auto__label"> Возраст авто</label>
+        <select class="auto__field" name="age" id="age" disabled>
+            <option value="0">Выберите возраст</option>
+            <option value="1">Менее 3 лет</option>
+            <option value="2">От 3 до 5 лет</option>
+            <option value="3">От 5 до 7 лет</option>
+            <option value="4">Более 7 лет</option>
+        </select>
+    </div>
+
+    <!--Способ оплаты -->
+    <div class="auto__item">
+        <label for="payment" class="auto__label"> Выберите способ оплаты</label>
+        <select class="auto__field" name="payment" id="payment">
+            <option value="0">Способ оплаты</option>
+            <option value="1">Карта</option>
+            <option value="2">Наличные</option>
+            <option value="3">Счёт на юр. лицо</option>
+        </select>
+    </div>
+
 <!-- Кнопка Рассчитать -->
 <button class="button">Рассчитать</button>
 </div>
@@ -87,7 +107,10 @@
 <div class="errors"></div>
 </div>
 
-
+<!-- ВЫВОД -->
+<div class="output">
+</div>
+</div>
     <script src="script.js"></script>
 </body>
 </html>

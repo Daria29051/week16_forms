@@ -4,6 +4,10 @@
 }
 
 .container {
+    margin-left: 50px;
+}
+
+.input{
     display: flex;
     flex-direction: row;
     width: 70vw;
@@ -62,4 +66,29 @@
 .button {
     width: 200px;
     cursor: pointer;
+}
+
+
+/* ПОЛЕ ВЫВОДА */
+.output{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    
+    
+}
+
+.output__titile {
+    font-size: 25px;
+}
+
+.output__part {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.output__item {
+    font-size: 17px;
+    font-weight: 400;
 }
