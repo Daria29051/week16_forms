@@ -29,6 +29,7 @@
     padding: 0px 40px;
     background-color: rgba(0, 0, 255, 0.5);
     width: 70vw;
+    margin-left: 50px;
 }
 
 .auto {
@@ -73,22 +74,24 @@
 .output{
     margin-top: 50px;
     display: flex;
-    flex-direction: column;
-    gap: 30px;
+    flex-direction: row;
+    gap: 70px;
     
     
 }
 
 .output__titile {
+    margin-top: 50px;
     font-size: 25px;
 }
 
-.output__part {
+
+.output__subtitle {
     font-size: 20px;
     font-weight: 600;
-}
+} 
 
 .output__item {
-    font-size: 17px;
+    font-size: 10px;
     font-weight: 400;
 }

@@ -36,11 +36,11 @@
 <!-- Тип топлива -->
 <div class="auto__item">
 <label for="fuel-items"> Тип топлива</label>
-<div class="radio-selector" id="fuel-items">
-<div class="radio"><input type="radio" name="fuel" value="petrol"> <p>Бензин</p></div>
-<div class="radio"><input type="radio" name="fuel" value="diesel"> <p>Дизель</p></div>
-<div class="radio"><input type="radio" name="fuel" value="electro"> <p>Электрический</p></div>
-</div>
+<form class="radio-selector" id="fuel-items">
+<div class="radio"><input type="radio" name="fuel" value="Бензин"> Бензин</div>
+<div class="radio"><input type="radio" name="fuel" value="Дизель"> Дизель</div>
+<div class="radio"><input type="radio" name="fuel" value="Электрический"> Электрический</div>
+</form>
 </div>
 
   <!-- Объем двигателя -->
@@ -59,8 +59,8 @@
 <div class="auto__item">
     <label for="condition-items"> Состояние авто</label>
     <form class="radio-selector" id="condition-items">
-    <div class="radio"><input type="radio" name="condition" value="new"> <p>Новый</p></div>
-    <div class="radio"><input type="radio" name="condition" value="old"> <p>Подержанный</p></div>
+    <div class="radio"><input type="radio" name="condition" value="Новый"> <p>Новый</p></div>
+    <div class="radio"><input type="radio" name="condition" value="Подержанный"> <p>Подержанный</p></div>
     </form>
     </div>
 
@@ -108,6 +108,7 @@
 </div>
 
 <!-- ВЫВОД -->
+<h2 class="output__titile"> Ваш автомобиль </h2>
 <div class="output">
 </div>
 </div>
