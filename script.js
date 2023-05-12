@@ -10,7 +10,7 @@ const owners = document.getElementById('owners'); //количество вла�
 const age = document.getElementById('age'); //возраст авто
 const payment = document.getElementById('payment'); //способ оплаты
 const output = document.querySelector('.output'); //поле вывода
-const conditionOptions = document.forms['condition-items'].elements['condition']; //находим радио-кнопки состояний авто (новый / бу)
+const conditionOptions = document.forms['condition-items'].elements['condition']; //радио-кнопки состояний авто (новый / подержанный)
 const fuelOptions = document.forms['fuel-items'].elements['fuel']; // радио-кнопки типов топлива
 
 
@@ -31,14 +31,12 @@ payment.onchange = function() {
 
 
 
-
+//map с брендами и их моделями
 let brandsAndModels=new Map();
 brandsAndModels.set('Renault', 'Logan,Duster,Sandero,Kaptur');
 brandsAndModels.set('Opel', 'Corsa,Insignia,Mokka,Astra');
 brandsAndModels.set('Mazda', 'CX5,CX7,Model 3,Model 6');
 brandsAndModels.set('Jaguar', 'E-Pace,XE,I-Pace,F-Type');
-
-
 
 
 
@@ -100,14 +98,14 @@ showOwners(); //вызываем функцию
 
 // РАССЧЕТ ИТОГОВОЙ СТОИМОСТИ (КАЛЬКУЛЯТОР)
 
-//map с брендами
+//map с брендами и их стартовой ценой
 let brandStartPrice=new Map();
 brandStartPrice.set('Renault', 700000);
 brandStartPrice.set('Opel', 1000000);
 brandStartPrice.set('Mazda', 1200000);
 brandStartPrice.set('Jaguar', 1400000);
 
-// map с моделями
+// map с моделями и их коэффициентами
 let modelsMultipler=new Map();
 modelsMultipler.set('Logan', 1.1);
 modelsMultipler.set('Duster', 1.2);
@@ -126,40 +124,41 @@ modelsMultipler.set('XE', 1.1);
 modelsMultipler.set('I-Pace', 1.2);
 modelsMultipler.set('F-Type', 1.3);
 
-// map c типом топлива
+// map c типами топлива и их коэффициентами
 let fuelMultipler=new Map();
 fuelMultipler.set('Бензин', 1.2);
 fuelMultipler.set('Дизель', 1.1);
 fuelMultipler.set('Электрический', 1.3);
 
-// map c состоянием авто
+// map c состоянием авто и их коэффициентами
 let conditionMultipler=new Map();
 conditionMultipler.set('Новый', 1);
 conditionMultipler.set('Подержанный', 0.8);
 
 
-//кол-во владельцев
+// map c кол-вом владельцев и их коэффициентами
 let ownersMultipler=new Map();
-ownersMultipler.set('1', 1); //1
-ownersMultipler.set('2', 0.9); //2
-ownersMultipler.set('3 и более', 0.8); //3 и более
+ownersMultipler.set('1', 1); 
+ownersMultipler.set('2', 0.9); 
+ownersMultipler.set('3 и более', 0.8); 
 
-//возраст авто
+
+//map с возрастом авто и их коэффициентами
 let ageMultipler=new Map();
-ageMultipler.set('Менее 3 лет', 1); //Менее 3 лет
-ageMultipler.set('От 3 до 5 лет', 0.9); // от 3 до  5
-ageMultipler.set('От 5 до 7 лет', 0.8); //от 5 до 7
-ageMultipler.set('Более 7 лет', 0.7); //более 7 лет
+ageMultipler.set('Менее 3 лет', 1); 
+ageMultipler.set('От 3 до 5 лет', 0.9); 
+ageMultipler.set('От 5 до 7 лет', 0.8); 
+ageMultipler.set('Более 7 лет', 0.7); 
 
 
 
-// коэффициент объема двигателя
-const engineMultipliermin = 1.1; // до 2,2 л
-const engineMultipliermax = 1.2; //от 2,2 л
+// коэффициенты объема двигателя
+const engineMultiplierMin = 1.1; // до 2,2 л
+const engineMultiplierMax = 1.2; //от 2,2 л
 
-// коэффициент мощности
-const powerMultipliermin = 1.2; // до 150 лс
-const powerMultipliermax = 1.4; // от 150 лс
+// коэффициенты мощности
+const powerMultiplierMin = 1.2; // до 150 лс
+const powerMultiplierMax = 1.4; // от 150 лс
 
 
 // ФУНКЦИЯ РАСЧЕТА ИТОГОВОЙ СТОИМОСТИ
@@ -168,11 +167,11 @@ const countPriceNewAuto = () => {
     let finalPrice;
    const finalPriceBeforeTechChars = brandStartPrice.get(brand.value) * modelsMultipler.get(model.value) * fuelMultipler.get(fuelOptions.value) * conditionMultipler.get(conditionOptions.value); 
    if ((engine.value < 2.2) && (power.value < 150)) {
-    finalPrice = finalPriceBeforeTechChars * engineMultipliermin * powerMultipliermin;
-    return Math.round(finalPrice);
+    finalPrice = finalPriceBeforeTechChars * engineMultiplierMin * powerMultiplierMin;
+    return Math.round(finalPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
    } else {
-   finalPrice = finalPriceBeforeTechChars * engineMultipliermax * powerMultipliermax;
-   return Math.round(finalPrice);   
+   finalPrice = finalPriceBeforeTechChars * engineMultiplierMax * powerMultiplierMax;
+   return Math.round(finalPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");   
 }
 }
 
@@ -182,21 +181,21 @@ const countPriceOldAuto = () => {
     let finalPrice;
     const finalPriceBeforeTechChars = brandStartPrice.get(brand.value) * modelsMultipler.get(model.value) * fuelMultipler.get(fuelOptions.value) * conditionMultipler.get(conditionOptions.value) * ownersMultipler.get(owners.options[owners.selectedIndex].value) * ageMultipler.get(age.options[age.selectedIndex].value); 
     if ((engine.value < 2.2) && (power.value < 150)) {
-        finalPrice = finalPriceBeforeTechChars * engineMultipliermin * powerMultipliermin;
-        return Math.round(finalPrice);
+        finalPrice = finalPriceBeforeTechChars * engineMultiplierMin * powerMultiplierMin;
+        return Math.round(finalPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
        } else {
-       finalPrice = finalPriceBeforeTechChars * engineMultipliermax * powerMultipliermax;
-       return Math.round(finalPrice);   
+       finalPrice = finalPriceBeforeTechChars * engineMultiplierMax * powerMultiplierMax;
+       return Math.round(finalPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");   
     }
  }
 
 
-// вешаем обработчик событий
+// вешаем обработчик событий (расчет стоимости нового и подержанного авто)
 button.addEventListener('click', countPriceNewAuto);
 button.addEventListener('click', countPriceOldAuto);
 
 
-// ВЫВОДИМ ВСЕ ХАРАКТЕРИСТИКИ ВЫБРАННОГО АВТО
+// ВЫВОДИМ ВСЕ ХАРАКТЕРИСТИКИ ВЫБРАННОГО АВТО НА ЭКРАН
 const showOutput =() => {
     if (conditionOptions.value ==='Подержанный' && ((engine.value > 1.1)|| (engine.value < 3.5)) && (power.value > 120)) {
 output.innerHTML = 
@@ -256,5 +255,5 @@ output.innerHTML =
 }
 }
 
-//вешаем обработчик событий
+//вешаем обработчик событий (вывод данных на экран)
 button.addEventListener('click', showOutput);
