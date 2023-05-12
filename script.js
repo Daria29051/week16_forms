@@ -215,12 +215,12 @@ output.innerHTML =
       <div class="output__part"> 
       <p class="output__subtitle">Состояние</p>
       <p> Состояние авто: ${conditionOptions.value}</p>
-      <p> Количество владельцев: ${owners.options[owners.selectedIndex].text}</p>
-      <p> Возраст авто: ${age.options[age.selectedIndex].text} </p>
+      <p> Количество владельцев: ${owners.value}</p>
+      <p> Возраст авто: ${age.value} </p>
        </div>
        <div class="output__part"> 
       <p class="output__subtitle">Способ оплаты</p>
-      <p> Способ оплаты: ${payment.options[payment.selectedIndex].text}</p>
+      <p> Способ оплаты: ${payment.value}</p>
        </div>
        <div class="output__part"> 
        <p class="output__subtitle">Итоговая стоимость</p>
@@ -245,7 +245,7 @@ output.innerHTML =
       </div>
        <div class="output__part"> 
       <p class="output__subtitle">Способ оплаты</p>
-      <p> Способ оплаты: ${payment.options[payment.selectedIndex].text}</p>
+      <p> Способ оплаты: ${payment.value}</p>
        </div>
        <div class="output__part"> 
        <p class="output__subtitle">Итоговая стоимость</p>
