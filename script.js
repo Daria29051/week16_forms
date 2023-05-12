@@ -14,15 +14,23 @@ const conditionOptions = document.forms['condition-items'].elements['condition']
 const fuelOptions = document.forms['fuel-items'].elements['fuel']; // радио-кнопки типов топлива
 
 
+// деактивируем кнопку по умолчанию
+button.setAttribute ('disabled', true);
+
+
+// ФУНКЦИЯ АКТИВАЦИИ КНОПКИ
+payment.onchange = function() { 
+    if (brand.value !=='Выберите бренд' && model.value !=='Выберите модель' && fuelOptions.value !=='' && engine.value !=='' && power.value !=='' && conditionOptions.value ==='Новый' && payment.value !=='Способ оплаты' ) {
+        button.removeAttribute ('disabled', true); 
+    } else if (brand.value !=='Выберите бренд' && model.value !=='Выберите модель' && fuelOptions.value !=='' && engine.value !=='' && power.value !=='' && conditionOptions.value ==='Подержанный' && owners.value !=='Выберите количество' && age.value !=='Выберите возраст' && payment.value !=='Способ оплаты' ) {
+    button.removeAttribute ('disabled', true);} 
+    else {
+        button.setAttribute ('disabled', true); 
+    }  
+}  
 
 
 
-// модели в зависимости от марки авто
-// let allModels=[];
-// allModels[0] = ['Logan', 'Duster', 'Sandero', 'Kaptur']; //модели Renault
-// allModels[1] = ['Corsa', 'Insignia', 'Mokka', 'Astra']; //модели Opel
-// allModels[2] = ['CX5', 'CX7', 'Model 3', 'Model 6']; //модели Mazda
-// allModels[3] = ['E-Pace', 'XE', 'I-Pace', 'F-Type']; //модели Jaguar
 
 let brandsAndModels=new Map();
 brandsAndModels.set('Renault', 'Logan,Duster,Sandero,Kaptur');
@@ -30,11 +38,16 @@ brandsAndModels.set('Opel', 'Corsa,Insignia,Mokka,Astra');
 brandsAndModels.set('Mazda', 'CX5,CX7,Model 3,Model 6');
 brandsAndModels.set('Jaguar', 'E-Pace,XE,I-Pace,F-Type');
 
+
+
+
+
 // ФУНКЦИЯ ВЫВОДА МОДЕЛИ В ЗАВИСИМОСТИ ОТ БРЕНДА
 brand.onchange = function() {
+
 // активируем поле модели
     model.disabled = false;
-    model.innerHTML="<option value='0'> Выберите модель </option>";
+    model.innerHTML="<option value='Выберите модель'> Выберите модель </option>";
 
 // выводим нужное значение
 let models = brandsAndModels.get(brand.value).split(',');
@@ -45,8 +58,9 @@ model.innerHTML += `<option value="${item}">${item}</option>`;
 }
 
 // ФУНКЦИЯ ВЫВОДА ОШИБОК ЗАПОЛЕНЕНИЯ ФОРМЫ
-let errorsArray = [];
+
 const checkValidity = () => {
+    let errorsArray = [];
     //проверка мощности
 if ((engine.value < 1.1)|| (engine.value > 3.5)) {
     errorsArray.push('<p>Введите объём двигателя от 1.8л до 3.5л</p>');
@@ -55,11 +69,12 @@ if ((engine.value < 1.1)|| (engine.value > 3.5)) {
 if (power.value < 120) {
   errorsArray.push('<p>Минимальная мощность автомобиля : 120 л.с.</p>');
 } 
+
 errors.innerHTML = errorsArray.join('\n');
 }
 
 
-button.addEventListener('click', checkValidity, {once : true}); //вешаем обработчик событий (проверка ошибок заполнения) на кнопку Рассчитать
+button.addEventListener('click', checkValidity); //вешаем обработчик событий (проверка ошибок заполнения) на кнопку Рассчитать
 
 
 
@@ -119,22 +134,22 @@ fuelMultipler.set('Электрический', 1.3);
 
 // map c состоянием авто
 let conditionMultipler=new Map();
-conditionMultipler.set('Новый', 1.2);
-conditionMultipler.set('Подержанный', 1.1);
+conditionMultipler.set('Новый', 1);
+conditionMultipler.set('Подержанный', 0.8);
 
 
 //кол-во владельцев
 let ownersMultipler=new Map();
-ownersMultipler.set('1', 1.3); //1
-ownersMultipler.set('2', 1.2); //2
-ownersMultipler.set('3', 1.1); //3 и более
+ownersMultipler.set('1', 1); //1
+ownersMultipler.set('2', 0.9); //2
+ownersMultipler.set('3 и более', 0.8); //3 и более
 
 //возраст авто
 let ageMultipler=new Map();
-ageMultipler.set('1', 1.3); //Менее 3 лет
-ageMultipler.set('2', 1.2); // от 3 до  5
-ageMultipler.set('3', 1.1); //от 5 до 7
-ageMultipler.set('4', 1); //более 7 лет
+ageMultipler.set('Менее 3 лет', 1); //Менее 3 лет
+ageMultipler.set('От 3 до 5 лет', 0.9); // от 3 до  5
+ageMultipler.set('От 5 до 7 лет', 0.8); //от 5 до 7
+ageMultipler.set('Более 7 лет', 0.7); //более 7 лет
 
 
 
@@ -183,7 +198,7 @@ button.addEventListener('click', countPriceOldAuto);
 
 // ВЫВОДИМ ВСЕ ХАРАКТЕРИСТИКИ ВЫБРАННОГО АВТО
 const showOutput =() => {
-    if (conditionOptions.value ==='Подержанный') {
+    if (conditionOptions.value ==='Подержанный' && ((engine.value > 1.1)|| (engine.value < 3.5)) && (power.value > 120)) {
 output.innerHTML = 
 `<div class="output__part"> 
     <p class="output__subtitle">Общая информация</p>
@@ -209,10 +224,10 @@ output.innerHTML =
        </div>
        <div class="output__part"> 
        <p class="output__subtitle">Итоговая стоимость</p>
-       <p> Стоимость: ${countPriceOldAuto()}</p>
+       <p> Стоимость, руб.: ${countPriceOldAuto()}</p>
         </div>
        `
-} else  {
+} else if (conditionOptions.value ==='Новый' && ((engine.value > 1.1)|| (engine.value < 3.5)) && (power.value > 120))  {
     output.innerHTML = `<div class="output__part"> 
     <p class="output__subtitle">Общая информация</p>
      <p> Марка: ${brand.value} </p>
@@ -234,10 +249,12 @@ output.innerHTML =
        </div>
        <div class="output__part"> 
        <p class="output__subtitle">Итоговая стоимость</p>
-       <p> Стоимость: ${countPriceNewAuto()}</p>
+       <p> Стоимость, руб.: ${countPriceNewAuto()}</p>
         </div>`
+} else {
+    output.innerHTML =`<div class="output__part"> <p class="output__subtitle">Проверьте корректность ввода данных</p></div>`
 }
 }
 
 //вешаем обработчик событий
-button.addEventListener('click', showOutput)
+button.addEventListener('click', showOutput);

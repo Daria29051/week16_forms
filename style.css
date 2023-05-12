@@ -67,7 +67,26 @@
 .button {
     width: 200px;
     cursor: pointer;
+    border: none;
+    margin: 10px;
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+} 
+
+.button:disabled {
+    background-color: rgba(128, 128, 128, 0.4); 
+    color: white;
 }
+
+.button:enabled {
+    background-color: rgba(0, 0, 255, 0.5);
+} 
+
+.button:enabled:hover {
+    background-color: rgb(157, 238, 157); 
+}
+
 
 
 /* ПОЛЕ ВЫВОДА */
